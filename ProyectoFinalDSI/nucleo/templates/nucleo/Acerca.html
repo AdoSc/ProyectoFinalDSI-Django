@@ -1,0 +1,24 @@
+{%extends 'nucleo/Base.html'%}
+
+{%block title%}Acerca de{%endblock%}
+
+{%block background%}{%load static%}{%static 'nucleo/img/acerca-de.png'%}{%endblock%}
+
+{%block headers%}
+    <h1>Acerca de</h1>
+    <span class="subheading">Nosotros</span>
+{%endblock%}
+
+{%block content%}
+    <div class="container">
+      <div class="row">   
+        <div class="col-lg-3 col-md-4 offset-lg-1">
+          <img class="img-fluid avatar" src="{%static 'nucleo/img/avatar-de.png'%}" alt="">
+        </div>
+        <div class="col-lg-7 col-md-8">
+          <h2 class="section-heading">TDE</h2>
+          <p>Estamos estudiando para ser desarrolladores de aplicaciones web y este proyecto es un prototipo de ello.</p>
+        </div>
+      </div>  
+    </div>
+{%endblock%}
