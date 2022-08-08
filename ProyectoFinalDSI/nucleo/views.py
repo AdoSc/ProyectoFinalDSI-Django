@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.views.generic.base import TemplateView
 
 html_base="""
     <h1>Tienda de dispositivos electrónicos.</h1>
@@ -11,15 +12,31 @@ html_base="""
     </ul>
 """
 
-# Create your views here.
-def Inicio(request):
-    return render(request, "nucleo/Inicio.html") # Envía la dirección del código.
+class VistaPaginaInicio(TemplateView):
+    template_name = "nucleo/Inicio.html"
+    
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'TituloInicio': 'TDE'})
 
 # La vista de la tienda que estaba aquí en la vista de la app nucleo, fue movida
 # a la vista de la app tienda. 
 
-def Acerca(request):
-    return render(request, "nucleo/Acerca.html") # Envía la dirección del código.
+class VistaPaginaAcerca(TemplateView):
+    template_name = "nucleo/Acerca.html"
 
-def Contacto(request):
-    return render(request, "nucleo/Contacto.html") # Envía la dirección del código.
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'TituloInicio': 'TDE'})
+
+
+class VistaPaginaContacto(TemplateView):
+    template_name = "nucleo/Contacto.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'TituloInicio': 'TDE'})
+
+
+class VistaPaginaCompra(TemplateView):
+    template_name = "nucleo/Compra.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, {'TituloInicio': 'TDE'})

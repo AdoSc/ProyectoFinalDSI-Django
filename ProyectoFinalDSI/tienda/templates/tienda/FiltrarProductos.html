@@ -1,0 +1,42 @@
+<!-- esta es la pagina donde se mostrara los productos de los productos  -->
+{%extends 'nucleo/Base.html'%}
+
+{%block title%}Productos{%endblock%}
+
+{%block background%}{%load static%}{%static 'nucleo/img/tienda-de.png'%}{%endblock%}
+
+{%block headers%}
+    <h1>Tienda virtual de dispositivos electrónicos</h1>
+{%endblock%}
+
+{%block content%}
+    <div class="col-lg-3 col-md-4 offset-lg-1">
+        <div class="row project">
+            <h2>Productos</h2>
+        </div>
+    </div>
+
+    {%for productosVar in productosFiltrados%}
+        <!-- Proyecto -->
+        <div class="row project">  	
+            <div class="col-lg-3 col-md-4 offset-lg-1">
+                <img class="img-fluid" src="{{productosVar.imagenp.url}}" alt="">
+            </div>
+            <div class="col-lg-7 col-md-8">
+                <h2 class="section-heading title">{{productosVar.nombrep}}</h2>   
+                <p><b>Descripción:</b> {{productosVar.detallep}}</p>
+                <p><b>Disponible en categoría:</b> {{productosVar.idnumcatp}}</p>
+                <p><b>Marca:</b> {{productosVar.marcap}}</p>
+                <p><b>Precio unitario:</b> {{productosVar.preciop}}</p>
+
+                <form action="" method="PUT">{% csrf_token %}
+                    <p><input type="number" name="Seleccionar" value="0" min="0" max="100" step="1"> <input type="submit" value="Agregar al carrito"> <input type="reset" value="Limpiar"></p>
+                </form>
+<!--
+                <button oneclick="{{productosVar.temp}}"><a class=»boton» src="">Mi botón</a></button>
+-->
+            </div>
+        </div>
+    {%endfor%}
+
+{%endblock%}

@@ -1,0 +1,22 @@
+{%extends 'nucleo/Base.html'%}
+
+{%block title%}Productos{%endblock%}
+
+{%block background%}{%load static%}{%static 'nucleo/img/tienda-de.png'%}{%endblock%}
+
+{%block headers%}
+        <div class="row project">
+            <h2>Seleccionar método de pago</h2>
+        </div>
+        <div class="row project">
+            <select name="metodo" id="pago">
+                <optgroup label="Pagar con">
+                    <option value="Visa">Visa</option>
+                    <option value="Mastercard">Mastercard</option>
+                    <option value="Paypal">Paypal</option>
+                </optgroup>
+            </select>
+            <button><a class="boton" href="">Continuar</a></button>
+        </div>
+{%endblock%}
+

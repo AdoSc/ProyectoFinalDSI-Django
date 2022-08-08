@@ -15,17 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from nucleo import views as vista_nucleo
-from tienda import views as vista_tienda
+#from nucleo import views as vista_nucleo
+#from tienda import views as vista_tienda
+from nucleo.views import VistaPaginaInicio, VistaPaginaAcerca, VistaPaginaContacto, VistaPaginaCompra
+from tienda.views import VistaListaCategoria, VistaListaProducto, FiltrarProductos
+#from tienda.views import VistaDetalleProducto
 
 from django.conf import settings
 
 urlpatterns = [
-    path('', vista_nucleo.Inicio, name="Inicio"),
-    path('Tienda/', vista_tienda.Tienda, name="Tienda"),
-    path('Acerca/', vista_nucleo.Acerca, name="Acerca"),
-    path('Contacto/', vista_nucleo.Contacto, name="Contacto"),
-    path('Producto/', vista_tienda.TiendaProducto, name="Producto"),    #Nueva dirección.
+    path('', VistaPaginaInicio.as_view(), name="Inicio"),
+    path('Categoria/', VistaListaCategoria.as_view(), name="Categoria"),
+    path('Producto/', VistaListaProducto.as_view(), name="Producto"),    #Nueva dirección.
+    path('FiltrarProductos/<slug>', FiltrarProductos, name="FiltrarProductos"),
+    #path('Producto/<int:pk>/<slug:slug>/', VistaDetalleProducto.as_view(), name="Producto"),    #Nueva dirección.
+    path('Acerca/', VistaPaginaAcerca.as_view(), name="Acerca"),
+    path('Contacto/', VistaPaginaContacto.as_view(), name="Contacto"),
+    path('Comprar/', VistaPaginaCompra.as_view(), name="Comprar"),
 
     path('admin/', admin.site.urls),
 ]

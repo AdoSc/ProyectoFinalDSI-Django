@@ -1,6 +1,6 @@
 {%extends 'nucleo/Base.html'%}
 
-{%block title%}Catálogo{%endblock%}
+{%block title%}Categorías{%endblock%}
 
 {%block background%}{%load static%}{%static 'nucleo/img/tienda-de.png'%}{%endblock%}
 
@@ -11,23 +11,21 @@
 {%block content%}
     <div class="col-lg-3 col-md-4 offset-lg-1">
         <div class="row project">
-            <h2>Todos los catálogos</h2>
+            <h2>Todas las categorías</h2>
         </div>
     </div>
-    {%for catalogosVar in catalogosweb%}
+    {%for categoriasVar in categoria_list%}
         <!-- Proyecto -->
         <div class="row project">  	
             <div class="col-lg-3 col-md-4 offset-lg-1">
-                <img class="img-fluid" src="{{catalogosVar.imagen.url}}" alt="">
+                <img class="img-fluid" src="{{categoriasVar.imagen.url}}" alt="">
             </div>
             <div class="col-lg-7 col-md-8">
-                <h2 class="section-heading title">{{catalogosVar.titulo}}</h2>   
-                <p>{{catalogosVar.descripcion}}</p>
+                <h2 class="section-heading title">{{categoriasVar.titulo}}</h2>   
+                <p>{{categoriasVar.descripcion}}</p>
 
-                {%if catalogosVar.enlace != ""%}
-                    <p><a href="{{catalogosVar.enlace}}">Ver más</a></p>
-                {%endif%}
-
+                <button><a class="boton" href="{% url 'FiltrarProductos' categoriasVar.slug %}">Ver los productos</a></button>
+                
             </div>
         </div>
     {%endfor%}

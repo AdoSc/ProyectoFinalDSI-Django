@@ -35,16 +35,17 @@
               <a class="nav-link" href="{%url 'Inicio'%}">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{%url 'Tienda'%}">Catálogo</a>
+              <a class="nav-link" href="{%url 'Categoria'%}">Categorías</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{%url 'Producto'%}">Productos</a>
+              <a class="nav-link" href="{%url 'Producto' %}">Todos los Productos</a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{%url 'Acerca'%}">Acerca de</a>
             </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="{%url 'Contacto'%}">Contacto</a>
             </li>
@@ -65,6 +66,22 @@
             </div>
           </div>
         </div>
+        {%if "FiltrarProductos" in request.path or "Producto" in request.path%}
+            <div style="background: none repeat scroll 0 0 #FFFFFF;
+                border: 1px solid #DDDDDD;
+                border-radius: 6px 6px 6px 6px;
+                bottom: 50px;
+                left: auto;
+                margin-left: -120px;
+                padding: 10px 0 0;
+                position: fixed;
+                text-align: center;
+                width: 90px;
+                z-index: 15;"> 
+                <!--Aqui el Codigo-->
+                <button><a class="boton" href="{%url 'Comprar' %}">Comprar selección</a></button>
+            </div>
+        {%endif%}
       </div>
     </header>
 

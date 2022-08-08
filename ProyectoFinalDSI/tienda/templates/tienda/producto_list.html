@@ -14,7 +14,7 @@
             <h2>Todos los productos</h2>
         </div>
     </div>
-    {%for productosVar in productosweb%}
+    {%for productosVar in producto_list%}
         <!-- Proyecto -->
         <div class="row project">  	
             <div class="col-lg-3 col-md-4 offset-lg-1">
@@ -22,8 +22,17 @@
             </div>
             <div class="col-lg-7 col-md-8">
                 <h2 class="section-heading title">{{productosVar.nombrep}}</h2>   
-                <p>{{productosVar.detallep}}</p>
-                <p>Marca: {{productosVar.marcap}}</p>
+                <p><b>Descripción:</b> {{productosVar.detallep}}</p>
+                <p><b>Disponible en categoría:</b> {{productosVar.idnumcatp}}</p>
+                <p><b>Marca:</b> {{productosVar.marcap}}</p>
+                <p><b>Precio unitario:</b> {{productosVar.preciop}}</p>
+
+                <form action="" method="PUT">{% csrf_token %}
+                    <p><input type="number" name="Seleccionar" value="0" min="0" max="100" step="1"> <input type="submit" value="Agregar al carrito"> <input type="reset" value="Limpiar"></p>
+                </form>
+<!--
+                <button oneclick="{{productosVar.temp}}"><a class=»boton» src="">Mi botón</a></button>
+-->
             </div>
         </div>
     {%endfor%}

@@ -1,15 +1,15 @@
 from django.contrib import admin
-from .models import Catalogo
+from .models import Categoria
 from .models import Producto
 
 # Register your models here.
-class CatalogoAdministrador(admin.ModelAdmin):
-    readonly_fields = ('enlace', 'creado', 'modificado')
+class CategoriaAdministrador(admin.ModelAdmin):
+    readonly_fields = ('idnumcat', 'creado', 'modificado')
 
 class ProductoAdministrador(admin.ModelAdmin):
-    readonly_fields = ('agregadop', 'modificadop')
+    readonly_fields = ('idnumprod', 'vendidop', 'agregadop', 'modificadop')
     
     
 
-admin.site.register(Catalogo, CatalogoAdministrador)
+admin.site.register(Categoria, CategoriaAdministrador)
 admin.site.register(Producto, ProductoAdministrador)
