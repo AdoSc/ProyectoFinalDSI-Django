@@ -10,12 +10,15 @@
 
     <!-- Estilos y fuentes del template  -->
     {%load static%}
+    {% load bootstrap4%}  <!-- debe instalarse pip install django-bootstrap4 -->
 
     <link href="{%static 'nucleo/vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
     <link href="{%static 'nucleo/vendor/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href="{%static 'nucleo/css/clean-blog.min.css'%}" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'nucleo/img/TDE-ICON.ico' %}">
 
   </head>
 
@@ -66,26 +69,42 @@
             </div>
           </div>
         </div>
-        {%if "FiltrarProductos" in request.path or "Producto" in request.path%}
+            {% if request.path != "/mycart/" %}
             <div style="background: none repeat scroll 0 0 #FFFFFF;
-                border: 1px solid #DDDDDD;
+                border: 2px solid #DDDDDD;
                 border-radius: 6px 6px 6px 6px;
-                bottom: 50px;
+                bottom: 20px;
                 left: auto;
-                margin-left: -120px;
-                padding: 10px 0 0;
+                margin-left: -100px;
+                padding: 0px 0 0;
                 position: fixed;
                 text-align: center;
-                width: 90px;
+                width: 120px;
                 z-index: 15;"> 
                 <!--Aqui el Codigo-->
-                <button><a class="boton" href="{%url 'Comprar' %}">Comprar selección</a></button>
+                <button><a class="boton" href="{%url 'Mycart' %}">Mi Carrito {{request.session.data.contador}}</a></button>
             </div>
-        {%endif%}
+            {% elif "mycart" in request.path and request.session.data.contador == null %}
+              <div style="background: none repeat scroll 0 0 #FFFFFF;
+                  border: 2px solid #DDDDDD;
+                  border-radius: 6px 6px 6px 6px;
+                  bottom: 20px;
+                  left: auto;
+                  margin-left: -100px;
+                  padding: 0px 0 0;
+                  position: fixed;
+                  text-align: center;
+                  width: 120px;
+                  z-index: 15;"> 
+                  <!--Aqui el Codigo-->
+                  <button><a class="boton" href="{%url 'Mycart' %}">Mi Carrito {{request.session.data.contador}}</a></button>
+              </div>
+            {% endif %}
       </div>
     </header>
 
     <!--Contenido-->
+    {% bootstrap_messages %}
     {%block content%}{%endblock%}
 
     {%if request.path != "/"%}<hr />{%endif%}

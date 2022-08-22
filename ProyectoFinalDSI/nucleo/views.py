@@ -35,8 +35,8 @@ class VistaPaginaContacto(TemplateView):
         return render(request, self.template_name, {'TituloInicio': 'TDE'})
 
 
-class VistaPaginaCompra(TemplateView):
-    template_name = "nucleo/Compra.html"
+class VistaPaginaFormaPago(TemplateView):
+    template_name = "nucleo/FormaPago.html"
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {'TituloInicio': 'TDE'})

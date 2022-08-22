@@ -14,21 +14,21 @@
             <h2>Todos los productos</h2>
         </div>
     </div>
-    {%for productosVar in producto_list%}
+    {%for productosVar in object_list%}
         <!-- Proyecto -->
         <div class="row project">  	
             <div class="col-lg-3 col-md-4 offset-lg-1">
-                <img class="img-fluid" src="{{productosVar.imagenp.url}}" alt="">
+                <a href="{% url 'detail' productosVar.slug %}"><img class="img-fluid" src="{{productosVar.imagenp.url}}" alt=""> </a>
             </div>
             <div class="col-lg-7 col-md-8">
                 <h2 class="section-heading title">{{productosVar.nombrep}}</h2>   
-                <p><b>Descripción:</b> {{productosVar.detallep}}</p>
-                <p><b>Disponible en categoría:</b> {{productosVar.idnumcatp}}</p>
-                <p><b>Marca:</b> {{productosVar.marcap}}</p>
+                
                 <p><b>Precio unitario:</b> {{productosVar.preciop}}</p>
 
+                <button><a class="boton" href="{% url 'detail' productosVar.slug %}">Ver detalles</a></button>
+
                 <form action="" method="PUT">{% csrf_token %}
-                    <p><input type="number" name="Seleccionar" value="0" min="0" max="100" step="1"> <input type="submit" value="Agregar al carrito"> <input type="reset" value="Limpiar"></p>
+                    <p><a class="btn btn-success" href="{% url 'cart' productosVar.slug %}">Añadir al carrito</a> </p>
                 </form>
 <!--
                 <button oneclick="{{productosVar.temp}}"><a class=»boton» src="">Mi botón</a></button>

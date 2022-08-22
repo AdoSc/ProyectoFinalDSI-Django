@@ -44,7 +44,7 @@ class Producto(models.Model):
     slug = AutoSlugField(populate_from='nombrep')
     detallep = models.TextField(verbose_name="Descripción")
     marcap = models.CharField(max_length=100, verbose_name="Marca del producto")
-    preciop = models.DecimalField(max_digits=15, decimal_places=2, default=0.0)
+    preciop = models.DecimalField(max_digits=15, decimal_places=2, default=0.0, verbose_name="Precio del producto")
     idnumcatp = models.ForeignKey(Categoria, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Disponible en categoría")
     imagenp = models.ImageField(verbose_name="Imagen del producto", upload_to="ProyectosImagenes")
     agregadop = models.DateTimeField(auto_now_add=True, verbose_name="Fecha agregado")

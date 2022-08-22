@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'nucleo',
     'tienda.apps.TiendaConfig',
+    "bootstrap4",  
 ]
 
 MIDDLEWARE = [

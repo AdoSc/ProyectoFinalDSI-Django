@@ -15,23 +15,35 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-#from nucleo import views as vista_nucleo
-#from tienda import views as vista_tienda
-from nucleo.views import VistaPaginaInicio, VistaPaginaAcerca, VistaPaginaContacto, VistaPaginaCompra
-from tienda.views import VistaListaCategoria, VistaListaProducto, FiltrarProductos
-#from tienda.views import VistaDetalleProducto
+
+from nucleo.views import VistaPaginaInicio, VistaPaginaAcerca, VistaPaginaContacto, VistaPaginaFormaPago
+from tienda.views import VistaListaCategoria, VistaListaProducto, FiltrarProductos, Cart , Detalle,Mycart, Comprar, BorrarLista
+
 
 from django.conf import settings
+
+
 
 urlpatterns = [
     path('', VistaPaginaInicio.as_view(), name="Inicio"),
     path('Categoria/', VistaListaCategoria.as_view(), name="Categoria"),
-    path('Producto/', VistaListaProducto.as_view(), name="Producto"),    #Nueva dirección.
+    path('Producto/', VistaListaProducto.as_view(), name="Producto"),   
     path('FiltrarProductos/<slug>', FiltrarProductos, name="FiltrarProductos"),
-    #path('Producto/<int:pk>/<slug:slug>/', VistaDetalleProducto.as_view(), name="Producto"),    #Nueva dirección.
+    #borre la ruta comprar
+    path('FormaPago/', VistaPaginaFormaPago.as_view(), name="FormaPago"),   #Restaurada.
+
     path('Acerca/', VistaPaginaAcerca.as_view(), name="Acerca"),
     path('Contacto/', VistaPaginaContacto.as_view(), name="Contacto"),
-    path('Comprar/', VistaPaginaCompra.as_view(), name="Comprar"),
+   #--------------------nuevas rutas---------------
+
+    path('cart/<slug>', Cart , name="cart"),
+    path('detalles/<slug>', Detalle , name="detail"),
+    path('mycart/', Mycart , name="Mycart"),
+    path('comprar/', Comprar , name="Comprar"),
+
+    #Re-definido oara borrar lista de compras.
+    path('BorrarLista/', BorrarLista, name="BorrarLista"),
+
 
     path('admin/', admin.site.urls),
 ]
