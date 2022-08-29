@@ -58,7 +58,7 @@
     </nav>
 
     <!-- Cabecera -->
-    <header class="masthead" style="background-image: url('{%block background%}{%endblock%}')">
+    <header class="masthead" style="background-image: url('{%block background%}{%endblock%}'); background-repeat:no-repeat; background-attachment:fixed; background-size:cover;">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-            {% if request.path != "/mycart/" %}
+            {% if request.path != "/mycart/" and request.path != '/TransaccionExitosa/'%}
             <div style="background: none repeat scroll 0 0 #FFFFFF;
                 border: 2px solid #DDDDDD;
                 border-radius: 6px 6px 6px 6px;
@@ -107,8 +107,9 @@
     {% bootstrap_messages %}
     {%block content%}{%endblock%}
 
-    {%if request.path != "/"%}<hr />{%endif%}
+    {%if request.path != "/" and request.path != '/TransaccionExitosa/'%}<hr />{%endif%}
 
+{%if request.path != '/TransaccionExitosa/'%}
     <!-- Pié de página -->
     <footer>
       <div class="container">
@@ -116,26 +117,10 @@
           <div class="col-lg-8 col-md-10 mx-auto">
             <ul class="list-inline text-center">
               <li class="list-inline-item">
-                <a href="#">
+                <a href="mailto:proyectoswebutm@gmail.com">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-youtube fa-stack-1x fa-inverse"></i>
                   </span>
                 </a>
               </li>
@@ -145,6 +130,7 @@
         </div>
       </div>
     </footer>
+{%endif%}
 
     <!-- Bootstrap y Javascripts -->
     <script src="{%static 'nucleo/vendor/jquery/jquery.min.js'%}"></script>

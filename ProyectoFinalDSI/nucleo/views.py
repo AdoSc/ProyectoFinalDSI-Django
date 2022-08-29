@@ -1,16 +1,5 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic.base import TemplateView
-
-html_base="""
-    <h1>Tienda de dispositivos electrónicos.</h1>
-    <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/Tienda/">Tienda</a></li>
-        <li><a href="/Producto/">Producto</a></li>
-        <li><a href="/Acerca/">Acerca</a></li>
-        <li><a href="/Contacto/">Contacto</a></li>
-    </ul>
-"""
 
 class VistaPaginaInicio(TemplateView):
     template_name = "nucleo/Inicio.html"
@@ -19,7 +8,7 @@ class VistaPaginaInicio(TemplateView):
         return render(request, self.template_name, {'TituloInicio': 'TDE'})
 
 # La vista de la tienda que estaba aquí en la vista de la app nucleo, fue movida
-# a la vista de la app tienda. 
+# a la vista de la app tienda.
 
 class VistaPaginaAcerca(TemplateView):
     template_name = "nucleo/Acerca.html"
@@ -40,3 +29,28 @@ class VistaPaginaFormaPago(TemplateView):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {'TituloInicio': 'TDE'})
+
+
+
+#Borrar luego.
+from django.core.mail import send_mail
+from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.core import mail
+
+def FacturaElectronica(request):
+    template_name = "nucleo/FacturaElectronica.html"
+    connection = mail.get_connection()
+    connection.open()
+    correo1 = mail.EmailMessage(
+        'Compra en TDE.',
+        'Factura de TDE por compra de productos.',
+        'proyectoswebutm@gmail.com', #DesdeEmail.
+        ['destino@servidor.ext'],    #ParaEmail.
+        connection=connection,
+    )
+    correo1.send() #Para enviar un correo.
+    connection.close()
+
+    return render(request, template_name, {'TituloInicio': 'TDE'})
+    

@@ -30,9 +30,6 @@
                 <form action="" method="PUT">{% csrf_token %}
                     <p><a class="btn btn-success" href="{% url 'cart' productosVar.slug %}">Añadir al carrito</a> </p>
                 </form>
-<!--
-                <button oneclick="{{productosVar.temp}}"><a class=»boton» src="">Mi botón</a></button>
--->
             </div>
         </div>
     {%endfor%}

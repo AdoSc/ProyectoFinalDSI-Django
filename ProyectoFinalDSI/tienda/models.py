@@ -3,12 +3,7 @@ from tkinter import CASCADE
 from django.db import models
 from django.db.models import Count
 from autoslug import AutoSlugField
-
-# Create your models here.
-incremento = 0
-
-def RetornarId():
-    return incremento
+from decimal import Decimal
 
 # Clase de la tienda virtual para la base de datos de categorías.
 class Categoria(models.Model):
@@ -19,9 +14,7 @@ class Categoria(models.Model):
     imagen = models.ImageField(verbose_name="Imagen de la categoría", upload_to="ProyectosImagenes")
     creado = models.DateTimeField(auto_now_add=True, verbose_name="Fecha agregado")
     modificado = models.DateTimeField(auto_now=True, verbose_name="Fecha de última actualización")
-    #enlace = models.URLField(null=True, blank=True, max_length=200, verbose_name="Enlace", default="/Producto/"+str(idnumcat))
-    #enlace = models.CharField(null=False, blank=False, max_length=200, verbose_name="Enlace", default="/Producto/"+str(slug))
-    
+
     class Meta:
         verbose_name = 'Categoría'
         verbose_name_plural = 'Categorías'
@@ -30,16 +23,10 @@ class Categoria(models.Model):
     def __str__(self):
         return self.titulo
 
-#datos = Categoria.objects.all()
-#datos = datos.annotate(cantidad_instancias_categoria=Count("Categoria"))
-#incremento = Categoria.objects.count()+1
-#print(incremento)
-
 #Clase para agregar los productos a las categorias en la base de datos.
 class Producto(models.Model):
     idnumprod = models.IntegerField(primary_key=True, verbose_name="Id del producto")
     cantidadp = models.IntegerField(verbose_name="Cantidad disponible", default=1)
-    vendidop = models.IntegerField(verbose_name="Total vendidos", default=0)
     nombrep = models.CharField(max_length=200, verbose_name="Nombre del producto")
     slug = AutoSlugField(populate_from='nombrep')
     detallep = models.TextField(verbose_name="Descripción")
@@ -59,14 +46,4 @@ class Producto(models.Model):
         return self.nombrep
 
 
-    #No utilizado, se puede borrar luego.
-    temp = 0
-    def COMPRATEMP():
-        temp += 1
-
-
-    #def VERCOMPRATEMP():
-    #    return temp
-
-    
 

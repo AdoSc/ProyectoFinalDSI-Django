@@ -1,20 +1,111 @@
 {%extends 'nucleo/Base.html'%}
 
-{%block title%}Productos{%endblock%}
+{%block title%}Método de pago{%endblock%}
 
-{%block background%}{%load static%}{%static 'nucleo/img/tienda-de.png'%}{%endblock%}
+{%block background%}{%load static%}{%static 'nucleo/img/Comercio-Electronico.png'%}{%endblock%}
 
 {%block headers%}
-        <div class="row project">
-            <h2>Seleccionar método de pago</h2>
+
+{% if request.session.data.contador > 0 %}
+
+  <script>
+    function validar () {
+      console.log(document.getElementById("Pago").value);
+      if (document.getElementById("Pago").value=='') {
+        document.getElementById('Vacio').style.display='block';
+        document.getElementById('PayPal').style.display='none';
+      }else if (document.getElementById("Pago").value=='PayPal') {
+        document.getElementById('PayPal').style.display='block';
+        document.getElementById('Vacio').style.display='none'
+      }
+    }
+  </script>
+
+  <div class="row project">
+    <h2>Seleccionar método de pago</h2>
+  </div>
+  <div class="row project">
+    <select name="metodo" id="Pago" style="font-size:24px; width:360px; height:60px;" onclick="validar();">
+      <optgroup label="Pagar con">
+        <option value="">Seleccione forma de pago...</option>
+        <option value="PayPal">PayPal</option>
+      </optgroup>
+    </select>
+    <div>
+        <button style="font-size:24px; width:360px; height:60px; margin-left:40px;"><a class="boton" href="{%url 'Producto' %}">Agregar más</a></button>
+    </div>
+    <div class="container">
+        <div style="float: center;
+                    background: green;  ">
+          <p>Total a pagar = $ {{request.session.data.precio}} </p>
         </div>
-        <div class="row project">
-            <select name="metodo" id="pago">
-                <optgroup label="Pagar con">
-                    <option value="Paypal">Paypal</option>
-                </optgroup>
-            </select>
-            <button><a class="boton" href="">Continuar</a></button>
-        </div>
+    </div>
+  </div>
+
+<div id="Vacio" style="display:none"><br /><h3>Seleccione un método de pago para continuar.</h3></div>
+
+
+<div id="PayPal" style="display:none">
+
+        <br />
+        
+        <!--Botón de PayPal con precio fijo.-->
+        <div id="smart-button-container">
+      <div style="text-align: center;">
+        <div id="paypal-button-container"></div>
+      </div>
+    </div>
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'horizontal',
+          label: 'pay',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"amount":{"currency_code":"USD","value":0.01}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            // Show a success message within this page, e.g.
+            const element = document.getElementById('paypal-button-container');
+            element.innerHTML = '';
+            element.innerHTML = '<h3>¡Gracias por tu pago!</h3>';
+
+            // Or go to another URL:  actions.redirect('thank_you.html');
+            
+            window.location="{%url 'FacturaElectronica'%}";
+
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script>
+        <!--Fin de botón de pago de PayPal con precio fijo.-->
+        
+</div>
+
+{%else%}
+    <p align="center"><h2>Todavía no ha agregado nada a su carrito de compras.</h2>
+    <button style="font-size:24px; width:360px; height:60px;"><a class="boton" href="{%url 'Producto' %}">Ir a comprar</a></button></p>
+{%endif%}
+
 {%endblock%}
 

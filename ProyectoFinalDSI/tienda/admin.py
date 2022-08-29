@@ -7,7 +7,7 @@ class CategoriaAdministrador(admin.ModelAdmin):
     readonly_fields = ('idnumcat', 'creado', 'modificado')
 
 class ProductoAdministrador(admin.ModelAdmin):
-    readonly_fields = ('idnumprod', 'vendidop', 'agregadop', 'modificadop')
+    readonly_fields = ('idnumprod', 'agregadop', 'modificadop')
     
     
 

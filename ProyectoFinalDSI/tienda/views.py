@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.contrib import messages
 from .models import Categoria
 from .models import Producto
+from decimal import Decimal
 
 # Create your views here.
 class VistaListaCategoria(ListView):
@@ -46,14 +47,10 @@ def Mycart (request):
     myproducts=Producto.objects.filter(slug__in=sess["item"])
     return render(request, "tienda/micarrito.html", {'myproducts':myproducts})
 
-#vista para reiniciar los objetos seleccionados osea al hacer la compra
-def Comprar (request):
-    sessdel=request.session.get("data", {"item":[]})
-    del request.session["data"]
-    return redirect("Mycart")
 
 #Re-definido para borrar la lista de compras.
 def BorrarLista (request):
     sessdel=request.session.get("data", {"item":[]})
     del request.session["data"]
     return redirect("Mycart")
+

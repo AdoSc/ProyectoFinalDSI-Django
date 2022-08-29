@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from nucleo.views import VistaPaginaInicio, VistaPaginaAcerca, VistaPaginaContacto, VistaPaginaFormaPago
-from tienda.views import VistaListaCategoria, VistaListaProducto, FiltrarProductos, Cart , Detalle,Mycart, Comprar, BorrarLista
+from nucleo.views import VistaPaginaInicio, VistaPaginaAcerca, VistaPaginaContacto, VistaPaginaFormaPago, FacturaElectronica
+from tienda.views import VistaListaCategoria, VistaListaProducto, FiltrarProductos, Cart , Detalle,Mycart, BorrarLista
 
 
 from django.conf import settings
@@ -29,8 +29,8 @@ urlpatterns = [
     path('Categoria/', VistaListaCategoria.as_view(), name="Categoria"),
     path('Producto/', VistaListaProducto.as_view(), name="Producto"),   
     path('FiltrarProductos/<slug>', FiltrarProductos, name="FiltrarProductos"),
-    #borre la ruta comprar
-    path('FormaPago/', VistaPaginaFormaPago.as_view(), name="FormaPago"),   #Restaurada.
+    #borré la ruta comprar.
+    path('FormaPago/', VistaPaginaFormaPago.as_view(), name="FormaPago"),   #Restaurada como FormaPago.
 
     path('Acerca/', VistaPaginaAcerca.as_view(), name="Acerca"),
     path('Contacto/', VistaPaginaContacto.as_view(), name="Contacto"),
@@ -39,10 +39,11 @@ urlpatterns = [
     path('cart/<slug>', Cart , name="cart"),
     path('detalles/<slug>', Detalle , name="detail"),
     path('mycart/', Mycart , name="Mycart"),
-    path('comprar/', Comprar , name="Comprar"),
 
     #Re-definido oara borrar lista de compras.
     path('BorrarLista/', BorrarLista, name="BorrarLista"),
+
+    path('TransaccionExitosa/', FacturaElectronica, name="FacturaElectronica"),
 
 
     path('admin/', admin.site.urls),
